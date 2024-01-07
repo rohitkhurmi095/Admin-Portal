@@ -1,0 +1,16 @@
+//open subMenu based on active class (Parent/Child Items)
+//if active class is applied on parentItem -> apply 'menu-open' class on childItem
+Logic:
+Ul
+    li - 'active' applied based on parentItem is active (PARENT)
+        a - menu (click)="OpenSubMenu(menuItem)"
+        a - link
+        ul - 'menu-open' applied based on ParentItem is active (CHILD)
+            li - active applied based on childItem is active
+                a - menu 
+                a - link
+
+//add or remove active class based on click
+OpenMenuItem(item:any){
+    item.active = !item.active;
+}

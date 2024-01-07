@@ -24,4 +24,8 @@ import { UserTypeComponent } from './user-type/user-type.component';
     MasterRoutingModule
   ]
 })
-export class MasterModule { }
+export class MasterModule { 
+  constructor(){
+    console.log('Master module loaded!');
+  }
+}

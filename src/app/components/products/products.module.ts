@@ -16,4 +16,8 @@ import { ProductListComponent } from './manage/product-list/product-list.compone
     ProductsRoutingModule
   ]
 })
-export class ProductsModule { }
+export class ProductsModule { 
+  constructor(){
+    console.log('Products module loaded!');
+  }
+}

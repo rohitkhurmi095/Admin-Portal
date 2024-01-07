@@ -14,4 +14,8 @@ import { ReportsComponent } from './reports.component';
     ReportsRoutingModule
   ]
 })
-export class ReportsModule { }
+export class ReportsModule { 
+  constructor(){
+    console.log('Reports module loaded!');
+  }
+}

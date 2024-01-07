@@ -1,1 +1,24 @@
-<p>layout works!</p>
+<!--========-->
+<!-- Layout -->
+<!--========-->
+<div class="page-wrapper">
+    <!-- Header -->
+    <app-header></app-header>
+    <div class="page-body-wrapper">
+        <!-- Sidebar -->
+        <div class="page-sidebar" [class.open]="_collapseSidebarService.collapseSidebar">
+            <app-sidebar></app-sidebar>
+        </div>
+        <!-- Body -->
+        <div class="page-body">
+            <!-- BreadCurmb -->
+            <app-breadcrumb></app-breadcrumb>
+            <!-- Content -->
+            <router-outlet></router-outlet>
+        </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <app-footer></app-footer>
+        </footer>
+    </div>
+</div>

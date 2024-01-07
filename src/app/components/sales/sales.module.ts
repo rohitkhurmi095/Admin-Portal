@@ -16,4 +16,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
     SalesRoutingModule
   ]
 })
-export class SalesModule { }
+export class SalesModule {
+  constructor(){
+    console.log('Sales module loaded!');
+  }
+ }

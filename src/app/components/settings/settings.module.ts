@@ -14,4 +14,8 @@ import { ProfileComponent } from './profile/profile.component';
     SettingsRoutingModule
   ]
 })
-export class SettingsModule { }
+export class SettingsModule {
+  constructor(){
+    console.log('Settings module loaded!');
+  }
+ }

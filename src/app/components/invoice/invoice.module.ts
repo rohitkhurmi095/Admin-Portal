@@ -14,4 +14,8 @@ import { InvoiceComponent } from './invoice.component';
     InvoiceRoutingModule
   ]
 })
-export class InvoiceModule { }
+export class InvoiceModule {
+  constructor(){
+    console.log('Invoice module loaded!');
+  }
+ }

@@ -1,1 +1,54 @@
-<p>header works!</p>
+<!--=========-->
+<!-- Header  -->
+<!--=========-->
+<div class="page-main-header" [class.open]="_collapseSidebarService.collapseSidebar">
+    <div class="main-header-right row">
+        <!-- HeaderLogo -->
+        <div class="main-header-left d-lg-none">
+            <div class="logo-wrapper">
+                <a href="">
+                    <img class="blur-up lazyloaded" [src]="shoplogoImage" alt="header-logo" /> 
+                </a>
+            </div>
+        </div>
+        <!-- Toggler (Collapse Sidebar)-->
+        <div class="mobile-sidebar">
+            <div class="media-body text-right switch-sm">
+                <!-- This is used to switch(show/hide) the sidebar/sidebar-header when icon is clicked via collapseSidebarService-->
+                <label class="switch">
+                    <a (click)="collapseSidebar()">
+                       <app-feather-icon icon="align-left"></app-feather-icon>
+                    </a>
+                </label>
+            </div>
+        </div>
+        <div class="nav-right col">
+            <!-- UserImage and Menu (Details | Logout)-->
+            <ul class="nav-menus" [class.open]="showHeaderOptions">
+                <li class="onhover-dropdown"></li>
+                <li></li>
+                <li class="onhover-dropdown">
+                    <div class="media align-items-center">
+                        <img class="align-self-center pull-right img-50 rounded-circle" [src]="adminUserImage" alt="user-image" />
+                    </div>
+                    <ul class="profile-dropdown onhover-show-div p-20 profile-dropdown-hover">
+                        <li>
+                            <a routerLink="/settings/profile">
+                                <app-feather-icon icon="user"></app-feather-icon> Edit Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/auth/login">
+                                <app-feather-icon icon="log-out"></app-feather-icon> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Mobile (toggler) | Show|Hide - UserImage and Menu (Details | Logout)-->
+            <div class="d-lg-none mobile-toggle pull-right" (click)="toggleHeaderOptions()">
+                <app-feather-icon icon="more-horizontal"></app-feather-icon>
+            </div>
+        </div>
+    </div>
+</div>

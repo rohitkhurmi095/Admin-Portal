@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CollapseSidebarService } from '../../services/collapse-sidebar.service';
 
 @Component({
   selector: 'app-layout',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent {
-
+  constructor(public _collapseSidebarService:CollapseSidebarService){}
 }

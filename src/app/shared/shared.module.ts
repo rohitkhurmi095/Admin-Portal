@@ -7,6 +7,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { FeatherIconComponent } from './components/feather-icon/feather-icon.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { FeatherIconComponent } from './components/feather-icon/feather-icon.com
     FeatherIconComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports:[
     FeatherIconComponent

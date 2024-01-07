@@ -14,4 +14,8 @@ import { DashboardComponent } from './dashboard.component';
     DashboardRoutingModule
   ]
 })
-export class DashboardModule { }
+export class DashboardModule {
+  constructor(){
+    console.log('Dashboard module loaded!');
+  }
+ }
