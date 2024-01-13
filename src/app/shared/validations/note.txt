@@ -1,0 +1,94 @@
+//====================================
+//Custom Validations in ReactiveForms
+//====================================
+-> Implement and export multiple custom validations
+- Reactive form validations apply on formControl instance
+-> Single FormControl: use class | applied on FormControl | Pass formControl instance as parameters in function
+-> Multiple FormControls: use function | applied on FormGroup | Pass formControl names as parameters in function
+                               |_ using FormGroup instance + FormControlName -> get FormControl instance
+  ----------------------
+1.Single Field Validator - use class
+  ----------------------
+    export class ValidatorName{
+        static validMethod(fc:FormControl){
+            if(fc.value!=null && fc.value!='' && fc.value!=undefined){
+                const regx = RegularExp;
+                if(regx.test(fc.value)){
+                    //nothing needs to be done -> validator works
+                    return null;
+                }else{
+                    //show validation -> error
+                    return {validatorMethod:true}
+                }
+            }else{
+                //nothing needs to be done
+                return null;
+            }
+        }
+    }
+Using: ValidatorName.validMethod
+
+   ----------------------
+2. Multi Fields Validator - use function
+   -----------------------
+   //Compare 2 fields and set error on field 2 based on validation
+    export function multiFieldValidator(formControlName1:string, formControlName2:string){
+        return (formGroup:FormGroup)=>{
+            //Get formControlInstance from formControlName and FormGroup instance
+            //const formControlInstance1 = formGroup.get(formControlName1); 
+            //const formControlInstance2 = formGroup.get(formControlName2);
+
+            const formControlInstance1 = formGroup.controls[formControlName1]; 
+            const formControlInstance2 = formGroup.controls[formControlName2];
+
+            //Check this validaton only if all other validatons works on formControlInstance2
+            if(formControlInstance2.errors && !formControlInstance2.errors['mustMatch']){
+                return null;
+            }
+
+            //compare values
+            if(formControlInstance1.value == formControlInstance2.value){
+                //nothing needs to be done -> validator works
+                return formControlInstance2.setErrors(null);
+            }else{
+                //show validation -> error
+                formControlInstance2.setErrors({mustMatch:true});
+            }
+        }
+    }
+
+Using:
+form:FormGroup;
+setupForm(){
+    this.form = this._fb.group({
+      password:['',Validators.compose([Validators.required,Validators.minLength(8)])],
+      confirmPassword:['',[Validators.required]],
+    },{
+      //Apply validation here 
+      //Note: this is deprecated syntax!
+      Validators:mustMatchValidator('password','confirmPassword')
+    });
+}
+
+->Latest syntax:
+import { AbstractControlOptions} from '@angular/forms';
+interface AbstractControlOptions {
+  validators?: ValidatorFn | ValidatorFn[] | null;
+  asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null;
+  updateOn?: 'change' | 'blur' | 'submit';
+}
+
+form:FormGroup;
+formOptions: AbstractControlOptions = { 
+    validators:mustMatchValidator('password','confirmPassword')
+};
+setupForm(){
+    this.form = this._fb.group({
+      password:['',Validators.compose([Validators.required,Validators.minLength(8)])],
+      confirmPassword:['',[Validators.required]],
+    },{
+      //Apply validation here 
+      //Note: this is deprecated syntax!
+      Validators:mustMatchValidator('password','confirmPassword')
+    },this.formOptions);
+}
