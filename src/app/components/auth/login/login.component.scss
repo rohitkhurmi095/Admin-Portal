@@ -3,9 +3,7 @@ input{
     border-radius: 10px !important;
 }
 
-
-//Theme Style
-.invalid-feedback{
-    font-size: 1em !important;
-    display: block;
-}
+//Note:
+//bootstrap Error classes:
+//is-invalid (for input borders) 
+//invalid-feedback (for div/span - error messages)
