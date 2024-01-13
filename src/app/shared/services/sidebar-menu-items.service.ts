@@ -31,7 +31,6 @@ export class SidebarMenuItemsService {
       {title:'Manage',active:false,type:'menu',children:[
         {title:'Product List',type:'link',path:'products/manage/product-list'},
         {title:'Add Product',type:'link',path:'products/manage/add-product'}
-       
       ]}
     ]},
 

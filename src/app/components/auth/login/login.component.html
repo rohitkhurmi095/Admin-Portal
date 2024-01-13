@@ -1,1 +1,94 @@
-<p>login works!</p>
+
+<div class="page-wrapper">
+    <div class="authentication-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 p-0 card-right">
+                    <div class="card tab2-card">
+                        <div class="card-body"> 
+                            <div class="tab-content" id="top-tabContent">
+                                <!--Note: ng-bootstrap nav is used for Tabs -->
+                                <ul ngbNav #nav="ngbNav" class="nav nav-tabs nav-material" activeId="register">
+                                    <li ngbNavItem="login">
+                                        <a ngbNavLink> <app-feather-icon icon="unlock"></app-feather-icon> Login</a>
+                                        <ng-template ngbNavContent>
+                                            <!--____________-->
+                                            <!-- Login Form -->
+                                            <!--____________-->
+                                            <div>
+                                                <form class="form-horizontal auth-form">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Username">
+                                                        <div class="invalid-feedback">
+                                                            <div>UserName is required</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="password" class="form-control" placeholder="Password">
+                                                        <div class="invalid-feedback">
+                                                            <div>Password is required</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-button">
+                                                        <button class="btn btn-primary" type="submit">Login</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </ng-template>
+                                    </li>
+                                    <li ngbNavItem="register">
+                                        <a ngbNavLink> <app-feather-icon icon="user-plus"></app-feather-icon> Register</a>
+                                        <ng-template ngbNavContent>
+                                            <!--_______________-->
+                                            <!-- Register Form -->
+                                            <!--_______________-->
+                                            <div>
+                                                <form class="form-horizontal auth-form">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="First Name">
+                                                        <div class="invalid-feedback">
+                                                            <div>First Name is required</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Last Name">
+                                                        <div class="invalid-feedback">
+                                                            <div>Last Name is required</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="email" class="form-control" placeholder="Email">
+                                                        <div class="invalid-feedback">
+                                                            <div>Email is required</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="password" class="form-control" placeholder="Password">
+                                                        <div class="invalid-feedback">
+                                                            <div>Password is required</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="password" class="form-control" placeholder="Confirm Password">
+                                                        <div class="invalid-feedback">
+                                                            <div>Confirm Password is required</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-button">
+                                                        <button class="btn btn-primary" type="submit">Register</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </ng-template>
+                                    </li>
+                                </ul>                    
+                                <div [ngbNavOutlet]="nav"></div>   
+                                <!----------------------------------------> 
+                            </div>         
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
