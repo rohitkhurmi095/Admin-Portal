@@ -15,12 +15,18 @@ export class SidebarComponent implements OnInit {
   adminUserImage = '/assets/images/dashboard/user.png';
   shoplogoImage = '/assets/images/dashboard/sahosoft-mall-logo.png';
 
+  //userDetails
+  userDetails:any;
 
   MenuItems:SidebarMenuItem[] = [];
   //Perform data binding operations in ngOnInit()
   ngOnInit(){
+    //SidebarMenuItems
     this.MenuItems = this._sidebarMenuItems.SIDEBAR_MENU_ITEMS;
     console.log('Sidebar MenuItems: ',this.MenuItems);
+
+    //Get loggedIn userDetails from localStorage
+    this.userDetails = JSON.parse(localStorage.getItem("userDetails"));
   }
 
 
@@ -29,4 +35,6 @@ export class SidebarComponent implements OnInit {
   openSubMenu(item:any){
     item.active = !item.active;
   }
+
+  
 }

@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import { HttpService } from 'src/app/shared/services/http.service';
 
 //Custom Validatons
 import {alphanumericFieldValidator,emailFieldValidator,mustMatchValidator}  from '../../../shared/validations/validations.validator';
-import { Router } from '@angular/router';
+import { Global } from 'src/app/shared/utility/global';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor(private _fb:FormBuilder,private _router:Router,private _toastr:ToastrService){}
+  constructor(private _fb:FormBuilder,private _router:Router,private _toastr:ToastrService,private _httpService:HttpService){}
+
+  //Accessing 'nav' templateRef variable using @ViewChild() for chaning tabs in nav
+  @ViewChild('nav') elNav:any;
   
   ngOnInit(){
     this.setupLoginForm();
@@ -47,13 +52,33 @@ export class LoginComponent {
   }
 
   registerUser(){
-    console.log(this.registerForm.value);
-
-    //Navigate to Dashboard after Register!
-    if(this.registerForm.valid){
-      this._toastr.success("Register","Successful!");
-      this._router.navigate(['/dashboard']);
+    //check if formData is valid
+    //Note: already validated this before submitting form so this can be skipped here
+    if(!this.registerForm.valid){
+      return;
     }
+   
+    //call API
+    this._httpService.post(Global.BASE_API_URL + 'UserMaster/Save/',this.registerForm.value).subscribe(res=>{
+      if(res.isSuccess){
+        this._toastr.success("Registration Successful!","Register");
+
+        //reset formData
+        this.registerForm.reset({
+          firstName:'',
+          lastName:'',
+          email:'',
+          password:'',
+          confirmPassword:'',
+          userTypeId:1
+        });
+
+        //Navigate to loginTab
+        this.elNav.select('loginTab');
+      }else{
+        this._toastr.error(res.errors[0],"Register");
+      }
+    });
   }
 
 
@@ -74,13 +99,33 @@ export class LoginComponent {
   }
 
   loginUser(){
-    console.log(this.loginForm.value);
-
-    if(this.loginForm.valid){
-      this._toastr.success("Register","Successful!");
-      //Navigate to Dashboard after login!
-      this._router.navigate(['/dashboard']);
+    //check if formData is valid
+    //Note: already validated this before submitting form so this can be skipped here
+    if(!this.loginForm.valid){
+      return;
     }
+
+    //call API
+    this._httpService.post(Global.BASE_API_URL + 'UserMaster/Login/',this.loginForm.value).subscribe(res=>{
+      if(res.isSuccess){
+        this._toastr.success("Login Successful!","Login");
+
+        //reset formData
+        this.loginForm.reset({
+          userName:'',
+          password:''
+        });
+
+        //set userDetails in localStorage
+        localStorage.setItem('userDetails',JSON.stringify(res.data));
+        
+        //Navigate to Dashboard
+        this._router.navigate(['dashboard']);
+      }else{      
+        this._toastr.error(res.errors[0],"Login");
+      }
+    });
+    
   }
 
 }

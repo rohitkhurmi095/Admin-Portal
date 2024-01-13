@@ -20,4 +20,8 @@ import { SharedModule } from "../../shared/shared.module";
         SharedModule //for feather-icon
     ]
 })
-export class AuthModule { }
+export class AuthModule {
+    constructor(){
+        console.log('Auth module loaded!');
+    }
+ }

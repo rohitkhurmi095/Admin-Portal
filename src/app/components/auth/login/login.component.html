@@ -8,8 +8,9 @@
                         <div class="card-body"> 
                             <div class="tab-content" id="top-tabContent">
                                 <!--Note: ng-bootstrap nav is used for Tabs -->
-                                <ul ngbNav #nav="ngbNav" class="nav nav-tabs nav-material" activeId="register">
-                                    <li ngbNavItem="login">
+                                <!-- Access #nav templateRef varaible on component using @ViewChild() for chaning tabs using select() method of nav-->
+                                <ul ngbNav #nav="ngbNav" class="nav nav-tabs nav-material" activeId="registerTab">
+                                    <li ngbNavItem="loginTab">
                                         <a ngbNavLink> <app-feather-icon icon="unlock"></app-feather-icon> Login</a>
                                         <ng-template ngbNavContent>
                                             <!--____________-->
@@ -36,14 +37,14 @@
                                             </div>
                                         </ng-template>
                                     </li>
-                                    <li ngbNavItem="register">
+                                    <li ngbNavItem="registerTab">
                                         <a ngbNavLink> <app-feather-icon icon="user-plus"></app-feather-icon> Register</a>
                                         <ng-template ngbNavContent>
                                             <!--_______________-->
                                             <!-- Register Form -->
                                             <!--_______________-->
                                             <div>
-                                                <form [formGroup]="registerForm" (ngSubmit)="registerUser()"  class="form-horizontal auth-form">
+                                                <form [formGroup]="registerForm" class="form-horizontal auth-form">
                                                     <div class="form-group">
                                                         <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" [ngClass]="{'is-invalid':(registerControls['firstName'].touched || registerControls['firstName'].dirty) && registerControls['firstName'].errors}">
                                                         <div class="invalid-feedback" *ngIf="(registerControls['firstName'].touched || registerControls['firstName'].dirty) && registerControls['firstName'].errors">
