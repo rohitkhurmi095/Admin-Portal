@@ -9,7 +9,7 @@
                             <div class="tab-content" id="top-tabContent">
                                 <!--Note: ng-bootstrap nav is used for Tabs -->
                                 <!-- Access #nav templateRef varaible on component using @ViewChild() for chaning tabs using select() method of nav-->
-                                <ul ngbNav #nav="ngbNav" class="nav nav-tabs nav-material" activeId="registerTab">
+                                <ul ngbNav #nav="ngbNav" class="nav nav-tabs nav-material" activeId="registerTab" (navChange)="onTabChange($event)">
                                     <li ngbNavItem="loginTab">
                                         <a ngbNavLink> <app-feather-icon icon="unlock"></app-feather-icon> Login</a>
                                         <ng-template ngbNavContent>

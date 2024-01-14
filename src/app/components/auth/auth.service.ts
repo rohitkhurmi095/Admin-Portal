@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
-  constructor(private _router:Router) { }
+  constructor(private _router:Router,private _toastr:ToastrService) { }
   
   //creating behaviourSubjects for currentUser/IsLoggedIn
   private currentUser: BehaviorSubject<any> = new BehaviorSubject(null); //contains JWT token also
@@ -37,6 +38,9 @@ export class AuthService {
 
     //Navigate to LoginPage
     this._router.navigate(['/auth/login']);
+
+    //show message!
+    this._toastr.success("Logout Successful!","Logout");
   }
 
     

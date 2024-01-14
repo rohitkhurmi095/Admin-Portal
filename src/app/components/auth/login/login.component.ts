@@ -64,14 +64,7 @@ export class LoginComponent {
         this._toastr.success("Registration Successful!","Register");
 
         //reset formData
-        this.registerForm.reset({
-          firstName:'',
-          lastName:'',
-          email:'',
-          password:'',
-          confirmPassword:'',
-          userTypeId:1
-        });
+        this.resetRegisterFormData();
 
         //Navigate to loginTab
         this.elNav.select('loginTab');
@@ -81,6 +74,16 @@ export class LoginComponent {
     });
   }
 
+  resetRegisterFormData(){
+    this.registerForm.reset({
+      firstName:'',
+      lastName:'',
+      email:'',
+      password:'',
+      confirmPassword:'',
+      userTypeId:1
+    });
+  }
 
 
   //======
@@ -111,10 +114,7 @@ export class LoginComponent {
         this._toastr.success("Login Successful!","Login");
 
         //reset formData
-        this.loginForm.reset({
-          userName:'',
-          password:''
-        });
+        this.resetLoginFormData();
 
         //Set localStorage/BehaviourSubjects and navigate to 'Dashboard' page
         //API Response: (res: {isSuccess:true/false | data: {} | errors:[]})
@@ -122,8 +122,27 @@ export class LoginComponent {
       }else{      
         this._toastr.error(res.errors[0],"Login");
       }
+    });  
+  }
+
+  resetLoginFormData(){
+    this.loginForm.reset({
+      userName:'',
+      password:''
     });
-    
+  }
+
+
+  //Tab Change 
+  //-----------
+  //Reset the current tab formControls when tab is changed
+  onTabChange(event:any){
+    //console.log(event);
+    if(event.activeId == 'loginTab'){
+      this.resetLoginFormData();
+    }else{
+      this.resetRegisterFormData();
+    }
   }
 
 }
