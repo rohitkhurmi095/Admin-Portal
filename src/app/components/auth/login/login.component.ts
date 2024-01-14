@@ -4,7 +4,7 @@ import {ToastrService} from 'ngx-toastr';
 import { HttpService } from 'src/app/shared/services/http.service';
 
 //Custom Validatons
-import {alphanumericFieldValidator,emailFieldValidator,mustMatchValidator}  from '../../../shared/validations/validations.validator';
+import {alphanumericFieldValidator,emailFieldValidator,mustMatchValidator, noWhiteSpaceValidator}  from '../../../shared/validations/validations.validator';
 import { Global } from 'src/app/shared/utility/global';
 import { AuthService } from '../auth.service';
 
@@ -38,8 +38,8 @@ export class LoginComponent {
     };
     
     this.registerForm = this._fb.group({
-      firstName:['',Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(15),alphanumericFieldValidator.validAlphanumericField])],
-      lastName:['',Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(15),alphanumericFieldValidator.validAlphanumericField])],
+      firstName:['',Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(15),alphanumericFieldValidator.validAlphanumericField,noWhiteSpaceValidator.validNoWhiteSpace])],
+      lastName:['',Validators.compose([Validators.required,Validators.minLength(3),Validators.maxLength(15),alphanumericFieldValidator.validAlphanumericField,noWhiteSpaceValidator.validNoWhiteSpace])],
       email:['',Validators.compose([Validators.required,emailFieldValidator.validEmailField])],
       password:['',Validators.compose([Validators.required,Validators.pattern(/^(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]).*(?=.*[A-Z]).*(?=.*[a-z]).*(?=.*\d).{8,}$/)])],
       confirmPassword:['',[Validators.required]],

@@ -92,7 +92,7 @@ export class noWhiteSpaceValidator{
         if(fc.value!=undefined && fc.value!=null && fc.value!=''){
             var trimmedString = fc.value.toString().trim();
               
-            if(trimmedString.length === 0){
+            if(trimmedString.length != 0){
                 return null;
             }else{
                 return {validNoWhiteSpace:true};
