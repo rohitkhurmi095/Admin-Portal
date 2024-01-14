@@ -26,7 +26,11 @@
             <!-- UserImage and Menu (Details | Logout)-->
             <ul class="nav-menus" [class.open]="showHeaderOptions">
                 <li class="onhover-dropdown"></li>
-                <li></li>
+                <li>
+                    <p style="margin-top: -30px!important;" class="user_name bg-light px-4 py-2 text-muted fw-bold rounded-3">
+                        {{'Hello '+userDetails.firstName + userDetails.lastName+'!'}}
+                    </p>
+                </li>
                 <li class="onhover-dropdown">
                     <div class="media align-items-center">
                         <img class="align-self-center pull-right img-50 rounded-circle" [src]="adminUserImage" alt="user-image" />
@@ -38,7 +42,7 @@
                             </a>
                         </li>
                         <li>
-                            <a routerLink="/auth/login">
+                            <a (click)="logOut()">
                                 <app-feather-icon icon="log-out"></app-feather-icon> Logout
                             </a>
                         </li>

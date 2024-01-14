@@ -34,6 +34,10 @@
             <app-feather-icon [icon]="menuItem.icon"></app-feather-icon> <span> {{menuItem.title}} </span>
             <i class="fa fa-angle-right pull-right" *ngIf="menuItem.children"></i>
         </a>
+        <!-- Button menu (LogOut button)-->
+        <a class="sidebar-header" *ngIf="menuItem.type === 'click'" (click)="performAction(menuItem.actionName)" routerLinkActive="active">
+            <app-feather-icon [icon]="menuItem.icon"></app-feather-icon> <span> {{menuItem.title}} </span>
+        </a>
         <!-------------------->
         <!-- 2nd Level Menu -->
         <!-------------------->

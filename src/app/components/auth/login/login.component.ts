@@ -1,12 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import { HttpService } from 'src/app/shared/services/http.service';
 
 //Custom Validatons
 import {alphanumericFieldValidator,emailFieldValidator,mustMatchValidator}  from '../../../shared/validations/validations.validator';
 import { Global } from 'src/app/shared/utility/global';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ import { Global } from 'src/app/shared/utility/global';
 })
 export class LoginComponent {
 
-  constructor(private _fb:FormBuilder,private _router:Router,private _toastr:ToastrService,private _httpService:HttpService){}
+  constructor(private _fb:FormBuilder,private _toastr:ToastrService,private _httpService:HttpService,private authService:AuthService){}
 
   //Accessing 'nav' templateRef variable using @ViewChild() for chaning tabs in nav
   @ViewChild('nav') elNav:any;
@@ -116,11 +116,9 @@ export class LoginComponent {
           password:''
         });
 
-        //set userDetails in localStorage
-        localStorage.setItem('userDetails',JSON.stringify(res.data));
-        
-        //Navigate to Dashboard
-        this._router.navigate(['dashboard']);
+        //Set localStorage/BehaviourSubjects and navigate to 'Dashboard' page
+        //API Response: (res: {isSuccess:true/false | data: {} | errors:[]})
+        this.authService.login(res.data);   
       }else{      
         this._toastr.error(res.errors[0],"Login");
       }

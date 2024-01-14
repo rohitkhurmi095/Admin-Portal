@@ -6,5 +6,6 @@ export interface SidebarMenuItem {
     active?: boolean, 
     type: string,
     path?:string,
+    actionName?: string,
     children?:SidebarMenuItem[]
 }

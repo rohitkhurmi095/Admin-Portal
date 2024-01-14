@@ -58,7 +58,7 @@ export class SidebarMenuItemsService {
     {title:'Reports',icon:'bar-chart',active:false,type:'link',path:'reports'},
 
     //LogOut
-    {title:'LogOut',icon:'log-out',active:false,type:'link',path:'auth/login'},
+    {title:'LogOut',icon:'log-out',active:false,type:'click',actionName:'logOut'},
   ]
 
 }

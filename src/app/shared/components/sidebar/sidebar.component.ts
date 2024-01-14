@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarMenuItemsService } from '../../services/sidebar-menu-items.service';
 import { SidebarMenuItem } from '../../interface/sidebar-menu-item';
+import { AuthService } from 'src/app/components/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +10,7 @@ import { SidebarMenuItem } from '../../interface/sidebar-menu-item';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private _sidebarMenuItems:SidebarMenuItemsService){}
+  constructor(private _sidebarMenuItems:SidebarMenuItemsService, private _authService:AuthService){}
 
   //Images
   adminUserImage = '/assets/images/dashboard/user.png';
@@ -36,5 +37,15 @@ export class SidebarComponent implements OnInit {
     item.active = !item.active;
   }
 
+  performAction(actionName:string){
+    if(actionName === 'logOut'){
+      this.logOut();
+    }
+  }
   
+  //LogOut
+  logOut(){
+    console.log('button clicked!');
+    this._authService.logOut();
+  }
 }
