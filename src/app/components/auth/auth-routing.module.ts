@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  {path:'auth/login',component:LoginComponent,title:'Login/Register'}
+  {path:'auth/login',component:LoginComponent,title:'Sahosoft Mall Admin Portal'}
 ];
 
 @NgModule({

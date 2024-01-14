@@ -6,10 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ToastrModule } from 'ngx-toastr';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './components/auth/auth.module';
+import { RequestInterceptor } from './interceptors/request.interceptor';
+import { ResponseInterceptor } from './interceptors/response.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,11 @@ import { AuthModule } from './components/auth/auth.module';
     AuthModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    //Add the interceptors to be called here (In Sequence) | multi -> multiple interceptors are there
+    {provide:HTTP_INTERCEPTORS, useClass:RequestInterceptor, multi:true},
+    {provide:HTTP_INTERCEPTORS, useClass:ResponseInterceptor, multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

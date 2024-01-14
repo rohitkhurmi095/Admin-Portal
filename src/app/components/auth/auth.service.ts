@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private _router:Router) { }
   
   //creating behaviourSubjects for currentUser/IsLoggedIn
-  private currentUser: BehaviorSubject<any> = new BehaviorSubject(null);
+  private currentUser: BehaviorSubject<any> = new BehaviorSubject(null); //contains JWT token also
   private isLoggedIn: BehaviorSubject<boolean>  = new BehaviorSubject(false);
 
   //------
@@ -19,8 +19,8 @@ export class AuthService {
   login(userDetails:any){
     //set user details in localStorage and behaviourSubjects
     localStorage.setItem('userDetails',JSON.stringify(userDetails));
-    this.isLoggedIn.next(true);
     this.currentUser.next(userDetails);
+    this.isLoggedIn.next(true);
 
     //Navigate to Dashboard
     this._router.navigate(['dashboard']);

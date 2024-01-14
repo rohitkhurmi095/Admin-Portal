@@ -42,10 +42,9 @@ export class SidebarComponent implements OnInit {
       this.logOut();
     }
   }
-  
+
   //LogOut
   logOut(){
-    console.log('button clicked!');
     this._authService.logOut();
   }
 }
