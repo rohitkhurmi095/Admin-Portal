@@ -6,3 +6,9 @@
 
 //Theme
 @import './assets/theme.scss';
+
+//Override Styles
+input{
+    padding: 8px !important;
+    border-radius: 8px !important;
+}

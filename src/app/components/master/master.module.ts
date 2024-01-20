@@ -8,6 +8,8 @@ import { BrandLogoComponent } from './brand-logo/brand-logo.component';
 import { ColorComponent } from './color/color.component';
 import { CategoryComponent } from './category/category.component';
 import { UserTypeComponent } from './user-type/user-type.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { UserTypeComponent } from './user-type/user-type.component';
   ],
   imports: [
     CommonModule,
-    MasterRoutingModule
+    MasterRoutingModule,
+    ReactiveFormsModule,
+    NgbModule //for ng-bootstrap tabs
   ]
 })
 export class MasterModule { 

@@ -1,1 +1,56 @@
-<p>size works!</p>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h5>Size Master</h5>
+        </div>
+        <div class="card-body tab2-card">  
+            <ul ngbNav #nav="ngbNav" activeId="addTab" class="nav nav-tabs nav-material" (navChange)="onTabChange($event)">
+                <li ngbNavItem="addTab">
+                    <button ngbNavLink>Add</button>
+                    <ng-template ngbNavContent>
+                        <!--______________-->
+                        <!-- Add/Edit Tab -->
+                        <!--______________-->
+                        <form class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">*Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="Name">
+                                    <div style="color: red;">
+                                        <div>Validation Message</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fa-pull-right" style="margin-top: 20px;">
+                                <button class="btn btn-primary">{{'Add/Edit'}}</button>
+                                <button class="btn btn-danger mx-2">Cancel</button>
+                            </div>
+                        </form>
+                    </ng-template>
+                </li>
+                <li ngbNavItem="viewTab">
+                    <button ngbNavLink>View</button>
+                    <ng-template ngbNavContent>
+                        <!--__________-->
+                        <!-- View Tab -->
+                        <!--__________-->
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="custom-datatable">
+                                                Table Here
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </li>
+            </ul>
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        </div>
+    </div>
+</div>
