@@ -1,0 +1,6 @@
+Note:
+-> As per Angular, when you manually refresh the page, the entire application state is reset, including the authentication status. 
+-> However, when navigating between tabs within the application, the application state might not be fully reset, causing the user to stay logged in.
+-> To maintain application state (including Behaviour Subjects - isLoggedIn,currentUser) i.e keep user loggedIn when page is refreshed -> check if userDetails are already present in the localStorage 
+                            -> if yes -> add details to BehaviourSubject again
+                            -> else -> user will be redirected to login page (as per the authGuard)

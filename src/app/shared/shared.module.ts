@@ -8,6 +8,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { FeatherIconComponent } from './components/feather-icon/feather-icon.component';
 import { RouterModule } from '@angular/router';
+import { Error404pageComponent } from './components/error404page/error404page.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { RouterModule } from '@angular/router';
     SidebarComponent,
     LayoutComponent,
     FeatherIconComponent,
+    Error404pageComponent,
   ],
   imports: [
     CommonModule,
