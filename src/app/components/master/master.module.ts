@@ -10,6 +10,7 @@ import { CategoryComponent } from './category/category.component';
 import { UserTypeComponent } from './user-type/user-type.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CommonModule,
     MasterRoutingModule,
     ReactiveFormsModule,
-    NgbModule //for ng-bootstrap tabs
+    NgbModule, //for ng-bootstrap tabs
+    NgxDatatableModule //For ngx-datatable
   ]
 })
 export class MasterModule { 
