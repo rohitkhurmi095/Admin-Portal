@@ -28,21 +28,9 @@ export class SizeComponent implements OnInit,OnDestroy {
   dbOpeartion:DbOperations;
 
   //All Data
-  objRows:[] = [];
+  objRows:any[] = [];
   //Single Data
   objRow:any;
-
-  //TestData -----------------------------------------
-  testRows = [
-    {"id":1,"name": "1AC","createdOn": "20/01/2024"},
-    {"id":2,"name": "2AC","createdOn": "07/12/2019"},
-    {"id":3,"name": "3AC","createdOn": "07/12/2019"},
-    {"id":4,"name": "4AC","createdOn": "07/12/2019"},
-    {"id":5,"name": "5AC","createdOn": "07/12/2019"},
-    {"id":6,"name": "6AC","createdOn": "07/12/2019"}
-  ];
-  testRow:any;
-  //---------------------------------------------------
 
   constructor(private _fb:FormBuilder,private _httpService:HttpService,private _toastr:ToastrService){}
   
@@ -74,6 +62,10 @@ export class SizeComponent implements OnInit,OnDestroy {
     //Reset ButtonText | DbOperation
     this.buttonText = "Add";
     this.dbOpeartion = DbOperations.Create;
+
+    //Call GetAllRecords API again with refreshed data
+    this.getAllData();
+
     //change from 'addTab' -> 'viewTab'
     this.elNav.select('viewTab');
   }
@@ -94,15 +86,35 @@ export class SizeComponent implements OnInit,OnDestroy {
 
     //Calling API -> add/Update
     switch(this.dbOpeartion){
+
+      //Add
+      //----
       case DbOperations.Create:
-        //Call Delete API here!
-        console.log(this.fData.value);
-        //Reset formData after add/update record
-        this.resetFormData();
+        //Call Save API here!
+        this._httpService.post(Global.BASE_API_URL+'SizeMaster/Save/',this.fData.value).subscribe(res=>{
+          if(res.isSuccess){
+            this._toastr.success("Record Saved Successfully!",this.componentName);
+            //Reset formData, including refreshing all data after adding record
+            this.resetFormData();
+          }else{
+            this._toastr.error(res.error,this.componentName);
+          }
+        });
         break;
+
+      //Update
+      //-------
       case DbOperations.Update:
         //Call Update API here!
-        console.log(this.fData.value);
+        this._httpService.post(Global.BASE_API_URL+'SizeMaster/Update/',this.fData.value).subscribe(res=>{
+          if(res.isSuccess){
+            this._toastr.success("Record Updated Successfully!",this.componentName);
+            //Reset formData, including refreshing all data after adding record
+            this.resetFormData();
+          }else{
+            this._toastr.error(res.error,this.componentName);
+          }
+        });
         //Reset formData after add/update record
         this.resetFormData();
         break;
@@ -118,10 +130,11 @@ export class SizeComponent implements OnInit,OnDestroy {
     this.dbOpeartion = DbOperations.Update;
 
     //Find the singleData by Id from objRows
-    this.testRow = this.testRows.find(x=>x.id === id);
+    this.objRow = this.objRows.find(x=>x.id === id);
     //fill the record details in form
     this.fData.patchValue({
-      name: this.testRow.name
+      id: this.objRow.id,
+      name: this.objRow.name
     });
 
     //Open Add/Edit View (addTab)
@@ -151,11 +164,20 @@ export class SizeComponent implements OnInit,OnDestroy {
     }).then((result) => {
       if (result.isConfirmed) {
         //Call Delete API here!
-        swalWithBootstrapButtons.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success"
-        });
+        this._httpService.post(Global.BASE_API_URL+"SizeMaster/Delete/",{id:id}).subscribe(res=>{
+          console.log(res.Data);
+          if(res.IsSuccess){
+            swalWithBootstrapButtons.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success"
+            });
+            //Call GetAllRecords API again with refreshed data
+            this.getAllData();
+          }else{
+            this._toastr.error(res.Errors,this.componentName);
+          }
+        })
       } 
       else if (result.dismiss === Swal.DismissReason.cancel) {
         swalWithBootstrapButtons.fire({
@@ -181,6 +203,13 @@ export class SizeComponent implements OnInit,OnDestroy {
   //_______
   getAllData(){
     //Call GetAll API here!
+    this._httpService.get(Global.BASE_API_URL+'SizeMaster/GetAll').subscribe(res=>{
+      if(res.isSuccess){
+        this.objRows = res.data;
+      }else{
+        this._toastr.error(res.errors,this.componentName);
+      }
+    });
   }
 
   //Tab Change 
@@ -190,7 +219,7 @@ export class SizeComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.testRows = null;
-    this.testRow = null;
+    this.objRows = null;
+    this.objRow = null;
   }
 }
