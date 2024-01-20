@@ -8,10 +8,14 @@ import { authGuard } from './components/auth/auth.guard';
 import { Error404pageComponent } from './shared/components/error404page/error404page.component';
 
 const routes: Routes = [
+  //Route for loginPage -> load authFeatureModule (at top)
+  {path:'auth',loadChildren:()=>import('./components/auth/auth.module').then(m=>m.AuthModule)},
+
+  //Other FeatureModules
   {path:'',component:LayoutComponent, children:ContentRoutes, canActivate:[authGuard]},
   
-  //If no route matches -> load error404 page
-  {path:'**',component:Error404pageComponent, title:'404 Not Found'}
+  //WildCard Route for 404 - Page Not Found (at the end)
+  { path: '**', component: Error404pageComponent, title: '404 Not Found'},
 ];
 
 @NgModule({

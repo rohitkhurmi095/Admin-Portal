@@ -24,7 +24,6 @@ import { ResponseInterceptor } from './interceptors/response.interceptor';
     BrowserAnimationsModule,
     ToastrModule.forRoot(), 
     //EagerLoading
-    AuthModule,
     SharedModule
   ],
   providers: [
